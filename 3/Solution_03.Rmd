@@ -1,0 +1,82 @@
+---
+title: "Solution - Sheet 03"
+author: 
+  - "Jaya Bharatam 235291"
+  - "Agatha Anna Baby 235293"
+  - "Amrutha Manoharan 236892"
+  - "Nishant Madan 230370"
+date: "4/21/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(nlme)
+load("SimulatedTreatmentEffect-3pLL.RData")
+```
+
+```{r}
+##Part a)
+##In 3pLL model the first parameter theta_1=0 for the entire dataset.
+model.3pLL.001 <-
+  gnls(
+    resp ~ (0 + (th4-0) / (1 + (exp((conc - th2) * th3)))),
+    data = conc.resp.df,
+    params = list(th2 + th3 + th4 ~ 1),
+    start = c(1, 2, 100),
+    control = gnlsControl(nlsTol = 0.1)
+  )
+model.3pLL.001
+```
+
+The lower asymptote, ${\theta_1}$, is 0 and the upper asymptote, ${\theta_4}$ is 99.081280, which is nearly close to 100.
+At ${\theta_2}$=0.959338, we got the half-maximal response which is (0.959338+99.081280)/2 = 50.02. The parameter ${\theta_3}$=2.305889 > 0, which signifies a decreasing profile for increasing concentrations.
+
+```{r}
+##Part b)
+##In 3pLL model the first parameter theta_11,theta_12,theta_13=0 for the entire dataset.
+dum1 <- ifelse(conc.resp.df$treat == "T1", 1, 0)
+dum2 <- ifelse(conc.resp.df$treat == "T2", 1, 0)
+dum3 <- ifelse(conc.resp.df$treat == "T3", 1, 0)
+
+model.3pLL.002 <- gnls(
+  resp ~ th4 * dum3 +
+    (0 + (th4-0) / (1 + (exp((conc - th2) * th3)))),
+  data = conc.resp.df,
+  params = list(th2 + th3 + th4 ~ 1),
+  start = c(1, 2, 100),
+  control = gnlsControl(nlsTol = 0.1)
+)
+model.3pLL.002
+```
+
+The lower asymptote, ${\theta_1}$, is 0 and the upper asymptote, ${\theta_4}$ is 80.102577, which is actually not really close to 100.
+At ${\theta_2}$=1.271901, we got the half-maximal response which is (1.271901+80.102577)/2 = 40.69. The parameter ${\theta_3}$=3.373962 > 0, which signifies a decreasing profile for each increasing concentrations.
+
+```{r}
+##Part c)
+model.3pLL.003 <- gnls(
+  resp ~ (0 + (th4-0) / (1 + (exp((conc - th21) * th31)))) * (dum1) 
+    + (0 + (th4-0) / (1 + (exp((conc - th22) * th32 )))) * (dum2),
+  data = conc.resp.df,
+  params = list(th21 + th22 + th31 + th32 + th4 ~ 1),
+  start = c(1, 1, 2, 2, 100),
+  control = gnlsControl(nlsTol = 0.1, apVar = TRUE)
+)
+model.3pLL.003
+```
+
+The model use parameter ${\theta_4}$ is shared across all three treatments and, ${\theta_2}$ and ${\theta_3}$ are estimated separately for the first and the second treatment. 
+Lower asymptote ${\theta_1}$ is zero.
+${\theta_21}$ 0.730, ${\theta_22}$ 1.189 and the upper asymptote is 99.22, which is nearly close to 100.
+The parameter ${\theta_{31}}$=2.3477416 > 0 and ${\theta_{32}}$=2.4848554 > 0, a higher value for the slope parameter, demonstrates a steeper decrease of the curve.
+
+```{r}
+#Part d)
+anova(model.3pLL.001, model.3pLL.002)
+```
+
+Both AIC and BIC value increases after adding the treatment 3 in the second model, which further increases p-value but not enough to cross the significance level of 5%, hence we can clearly reject the null hypothesis that both models are equivalent. This indicates that the second model has a significantly better fit and thus, we can difference between all the three treatment groups can be easily seen.

@@ -1,0 +1,402 @@
+---
+title: "Solution Sheet 02"
+author: 
+  - "Jaya Bharatam 235291"
+  - "Agatha Anna Baby 235293"
+  - "Amrutha Manoharan 236892"
+  - "Nishant Madan 230370"
+date: "4/15/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(Iso)
+load("E:/TUD/04.Semester/toxicology-I/assignments/2/Simulated-Isotonic.RData")
+conc <-  c(rep(0, 4), rep(1, 3), rep(2, 5), rep(3, 6), rep(4, 4), rep(5, 5))
+```
+
+# Gene 1
+```{r fig.show="hold", out.width="50%"}
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene1"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean), c(4, 3, 5, 6, 4, 5)),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1)
+)
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene1"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(
+    tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean),
+    c(4, 3, 5, 6, 4, 5),
+    decreasing = TRUE
+  ),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1)
+)
+```
+
+# Gene 2
+```{r fig.show="hold", out.width="50%"}
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene2"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean), c(4, 3, 5, 6, 4, 5)),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1)
+)
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene2"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(
+    tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean),
+    c(4, 3, 5, 6, 4, 5),
+    decreasing = TRUE
+  ),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1)
+)
+```
+
+# Gene 3
+```{r fig.show="hold", out.width="50%"}
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene3"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean), c(4, 3, 5, 6, 4, 5)),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1),
+  cex = 0.75
+)
+plot(
+  conc,
+  Simulated.Isotonic[, "ExprGene3"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  unique(conc),
+  tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  unique(conc),
+  pava(
+    tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean),
+    c(4, 3, 5, 6, 4, 5),
+    decreasing = TRUE
+  ),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1),
+  cex = 0.75
+)
+```
+
+# Reverse of each genes
+
+## Gene 1
+```{r fig.show="hold", out.width="50%"}
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene1"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene1"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5))),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1)
+)
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene1"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene1"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene1"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5)),
+  decreasing = TRUE),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topright",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1)
+)
+```
+
+## Gene 2
+```{r fig.show="hold", out.width="50%"}
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene2"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene2"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5))),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1)
+)
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene2"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene2"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene2"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5)),
+  decreasing = TRUE),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1)
+)
+```
+
+## Gene 3
+```{r fig.show="hold", out.width="50%"}
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene3"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene3"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5))),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Isotonic Regression"),
+  lty = c(2, 1),
+  cex = 0.75
+)
+plot(
+  -conc,
+  Simulated.Isotonic[, "ExprGene3"],
+  pch = 21,
+  bg = "grey",
+  xlab = "Concentration",
+  ylab = "Gene expression value"
+)
+points(
+  rev(-unique(conc)),
+  rev(tapply(Simulated.Isotonic[, "ExprGene3"], conc, mean)),
+  type = "l",
+  lty = 2,
+  lwd = 2
+)
+points(
+  rev(-unique(conc)),
+  pava(rev(tapply(
+    Simulated.Isotonic[, "ExprGene3"], conc, mean
+  )), rev(c(4, 3, 5, 6, 4, 5)),
+  decreasing = TRUE),
+  type = "l",
+  lty = 1,
+  lwd = 2
+)
+legend(
+  "topleft",
+  legend = c("Unrestricted Mean", "Antitonic Regression"),
+  lty = c(2, 1),
+  cex = 0.75
+)
+```
+
